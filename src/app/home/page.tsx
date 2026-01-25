@@ -1,9 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { workData, educationData, pubData } from '../data/homePageData';
 
 export default function Home() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // This allows <a href="..."></a> inside strings in workData
+  const renderDescription = (text: string) => {
+    return <span dangerouslySetInnerHTML={{ __html: text }} />;
+  };
+
   useEffect(() => {
     // Scroll to top on page load
     window.scrollTo(0, 0);
@@ -37,19 +46,63 @@ export default function Home() {
     };
   }, []);
 
+  // Handle scroll button visibility
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      window.addEventListener('resize', checkScroll);
+      return () => {
+        container.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      };
+    }
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const cardWidth = container.clientWidth - 60; // Card width minus preview gap
+      const gap = 40; // Gap between cards
+      const scrollAmount = cardWidth + gap; // Scroll to next card with preview
+      
+      const newScrollLeft = 
+        direction === 'left' 
+          ? container.scrollLeft - scrollAmount
+          : container.scrollLeft + scrollAmount;
+      
+      container.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth',
+      });
+
+      // Check scroll state after animation completes
+      setTimeout(checkScroll, 500);
+    }
+  };
+
   return (
     <>
       {/* Top Navigation Bar */}
       <nav className={"navbar"}>
         <div className={"navContainer"}>
-          <div className={"logo"}>ADAM</div>
+          <div className={"logo"}>AdamTay</div>
           <ul className={"navLinks"}>
             <li><a href="#experience"><span></span> Experience</a></li>
             <li><a href="#education"><span></span> Education</a></li>
             <li><a href="#publications"><span></span> Publications</a></li>
             <li><a href="#contact"><span></span> Contact</a></li>
           </ul>
-          <a href="/resume.pdf" className={"resumeBtn"}>Resume</a>
+          <a href="resume.pdf" className={"resumeBtn"}>Resume</a>
         </div>
       </nav>
 
@@ -57,12 +110,14 @@ export default function Home() {
         {/* Hero Section */}
         <section className={"hero"} id="home">
           <div className={"heroContent"}>
-            <p style={{ color: 'var(--accent-blue)', fontFamily: 'monospace' }}>Hi, my name is</p>
+            <p style={{ color: 'var(--accent-blue)', fontFamily: 'monospace' }}>Hello there! I'm</p>
             <h1 className={"title"}>Adam Tay</h1>
-            <h2 className={"subtitle"}>I build things for the web.</h2>
+            <h2 className={"subtitle"}>I'm an AI Engineer and Freelancer.</h2>
             <p className={"intro"}>
-              I am a software engineer specializing in building (and occasionally designing) 
-              exceptional digital experiences.
+              I make AI useful for real world applications using <b className={"highlight"}>LLM Agents, MCP, RAG, and Multimodal AI</b>.
+            </p>
+            <p className={"intro"}>
+              I've worked in Fortune 500 companies and top-tier companies like <b className={"highlight"}>Intel, Jabil, and Mediatek</b>.
             </p>
           </div>
 
@@ -81,23 +136,43 @@ export default function Home() {
         {/* Experience Section */}
         <section id="experience" className={"section"}>
           <h2 className={"sectionHeading"}>Work Experience</h2>
-          <div>
-            {workData.map((job) => (
-              <div key={job.id} className={"card"}>
+          <div className={"horizontalScrollerWrapper"}>
+            <button 
+              className={"scrollButton"} 
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              aria-label="Scroll left"
+              title="Previous"
+            >
+              ‹
+            </button>
+            <div className={"horizontalScroller"} ref={scrollContainerRef}>
+              {workData.map((job) => (
+                <div key={job.id} className={"card"}>
                 <div className={"cardHeader"}>
                   {job.logo && <img src={job.logo} alt={job.company} className={"companyLogo"} />}
                   <div className={"cardTitle"}>
-                    <h3>{job.role} <span style={{color: 'var(--accent-blue)'}}>@ {job.company}</span></h3>
+                    <h3>{job.role} <span style={{color: 'var(--accent-blue)'}}><br></br>@ {job.company}</span></h3>
                     <span className={"meta"}>{job.period}</span>
                   </div>
                 </div>
                 <ul>
                   {job.description.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>{renderDescription(item)}</li>
                   ))}
                 </ul>
               </div>
             ))}
+            </div>
+            <button 
+              className={"scrollButton"} 
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              aria-label="Scroll right"
+              title="Next"
+            >
+              ›
+            </button>
           </div>
         </section>
 
@@ -126,7 +201,7 @@ export default function Home() {
                 <h3>{pub.title}</h3>
                 <span className={"meta"}>{pub.publisher}</span>
                 <br />
-                <a href={pub.link} target="_blank" rel="noopener noreferrer">Read Article &rarr;</a>
+                <a href={pub.link} target="_blank" rel="noopener noreferrer">Article Link &rarr;</a>
               </div>
             ))}
           </div>
@@ -135,28 +210,30 @@ export default function Home() {
         {/* Social Links Footer Section */}
         <section id="contact" className={"section socialSection"}>
           <div className={"socialContent"}>
-            <h2>Contact</h2>
-            <p>Feel free to reach out through any of these platforms</p>
+            <h2>Let's Connect !</h2>
+            <p>Feel free to reach out to me through any of these platforms</p>
             <div className={"socialLinks"}>
-              <a href="mailto:your.email@example.com" className={"socialLink"} title="Email">
+              <a href="mailto:tayxhwork@gmail.com" className={"socialLink"} title="Email">
                 <span className={"icon"}>✉</span>
                 <span className={"label"}>Email</span>
               </a>
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="GitHub">
-                <span className={"icon"}>⚙</span>
+              <a href="https://github.com/adamxht" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="GitHub">
+                <span className={"icon"}>
+                  <img src="https://media.licdn.com/dms/image/v2/C560BAQFmuLSyL1nlPA/company-logo_200_200/company-logo_200_200/0/1678231359043/github_logo?e=1770854400&v=beta&t=ZuWj1JohQKoGT55Xwrq_UDqXbZv2LTLv8S3RQodaYVQ" alt="LinkedIn" style={{ width: '2.5rem', height: '2.5rem' }} />
+                </span>
                 <span className={"label"}>GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="LinkedIn">
-                <span className={"icon"}>💼</span>
+              <a href="https://www.linkedin.com/in/tay-xue-hao/" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="LinkedIn">
+                <span className={"icon"}>
+                  <img src="https://media.licdn.com/dms/image/v2/C560BAQHaVYd13rRz3A/company-logo_200_200/company-logo_200_200/0/1638831590218/linkedin_logo?e=1770854400&v=beta&t=6PDW8E0jLScGdCXVtMGOEA8b5suMylgTIyfAYDy5yVo" alt="LinkedIn" style={{ width: '2.5rem', height: '2.5rem' }} />
+                </span>
                 <span className={"label"}>LinkedIn</span>
               </a>
-              <a href="https://fiverr.com/yourusername" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="Fiverr">
-                <span className={"icon"}>✨</span>
+              <a href="https://www.fiverr.com/dravent" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="Fiverr">
+                <span className={"icon"}>
+                  <img src="https://media.licdn.com/dms/image/v2/D560BAQGIZewdCoscfA/company-logo_100_100/company-logo_100_100/0/1690823958391/fiverr_freelancers_buyer_and_seller_logo?e=1770854400&v=beta&t=CrrXwOl3gArMhxwRxyFpAp0pWgjA-Z6TcFpGzA7TRyM" alt="Fiverr" style={{ width: '2.5rem', height: '2.5rem' }} />
+                </span>
                 <span className={"label"}>Fiverr</span>
-              </a>
-              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="Twitter">
-                <span className={"icon"}>𝕏</span>
-                <span className={"label"}>Twitter</span>
               </a>
             </div>
           </div>
@@ -165,8 +242,6 @@ export default function Home() {
         {/* Back to Top Section */}
         <section id="top" className={"section backToTopSection"}>
           <div className={"backToTopContent"}>
-            <h2>Let's Connect</h2>
-            <p>Enjoyed my portfolio? Scroll back to the top to explore more or get in touch!</p>
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className={"backToTopBtn"}

@@ -15,6 +15,7 @@
   --text-primary: #ffffff;  // Pure white for high contrast
   --text-secondary: #8e8e93; // Grey for descriptions
   --text-tertiary: #636366; // Lighter grey
+  --text-highlight: #aeaeb9; // Lighter grey
 }
 
 body {
@@ -87,7 +88,7 @@ a {
 
 // Utility classes
 .container {
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 48px;
 
@@ -193,7 +194,7 @@ p {
 
     li {
       margin-bottom: 16px;
-      color: var(--text-secondary);
+      color: var(--text-highlight);
       line-height: 1.7;
       padding-left: 24px;
       position: relative;

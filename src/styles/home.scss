@@ -11,10 +11,19 @@
 }
 
 .logo {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -1px;
   color: var(--text-primary);
+  text-shadow: none;
+  font-style: italic;
+  font-family: 'Mr Dafoe', cursive;
+}
+
+.highlight {
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--text-highlight);
   text-shadow: none;
 }
 
@@ -259,6 +268,7 @@
   text-align: center;
   padding: 80px 0;
   border-bottom: 1px solid rgba(0, 153, 255, 0.1);
+  margin-bottom: 0;
 }
 
 .socialContent {
@@ -338,6 +348,106 @@
     .label {
       font-size: 0.9rem;
     }
+  }
+}
+
+// Horizontal Scroller Container Wrapper
+.horizontalScrollerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+// Horizontal Scroller Container
+.horizontalScroller {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  flex: 1;
+  
+  // Hide scrollbar but keep scrolling functional
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 153, 255, 0.3) transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 153, 255, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: rgba(0, 153, 255, 0.5);
+    }
+  }
+
+  // Keep cards at full width to match other sections, but show preview of next card
+  > .card {
+    flex: 0 0 auto;
+    width: calc(100% - 100px);
+    max-width: 450px;
+    margin-bottom: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+// Scroll Button Styles
+.scrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1.5px solid rgba(0, 153, 255, 0.3);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--accent-blue);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent-blue);
+    background-color: rgba(0, 153, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 153, 255, 0.15);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: rgba(0, 153, 255, 0.1);
+
+    &:hover {
+      background-color: transparent;
+      box-shadow: none;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 1rem;
   }
 }
 
