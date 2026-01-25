@@ -2,4 +2,4 @@
 
 Website to showcase my portfolio.
 
-- Link: https://adam-portfolio-app.vercel.app/home
+- Link: https://adamtay.vercel.app/home
