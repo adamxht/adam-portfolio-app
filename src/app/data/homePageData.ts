@@ -12,7 +12,7 @@ export const workData: Experience[] = [
       "Perform Post Training Quantization and Quantization Aware Finetuning to minimize accuracy loss after model optimization.",
       "Develop Model Analytics and Visualization tools to analyze model health at various levels of granularity."
     ],
-    logo: "https://media.licdn.com/dms/image/v2/D4E0BAQGSguzo7nhEgA/company-logo_100_100/B4EZaIRb7oGYAU-/0/1746042994770/mediatek_logo?e=1770854400&v=beta&t=UxlHTq0Vq3scs4vl5u1cWgQphCj8_A6QKXcHDXA__94"
+    logo: "/assets/icons/mediatek-logo.jpg"
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ export const workData: Experience[] = [
       "Fine-tuned domain-specific code generation models using PEFT and Unsloth, increasing accuracy from 36.1% to 84.8%.",
       "Mentored junior engineers and led teams in ongoing PEFT fine-tuning and model graph partitioning projects."
     ],
-    logo: "https://media.licdn.com/dms/image/v2/C560BAQGpvWtEtj9oTQ/company-logo_200_200/company-logo_200_200/0/1630663244735/intel_corporation_logo?e=1770854400&v=beta&t=ZJdeVgsqPOKYXMYcNuwCI8F9V9ePowptQ9oZH4nTXJY"
+    logo: "/assets/icons/intel-logo.jpg"
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ export const workData: Experience[] = [
       "Conducted data transformation for fine-tuning by converting raw text into structured JSON prompt-response pairs.",
       "Applied semi-supervised self-training for MBTI personality prediction on Twitter datasets, achieving a 0.91 average f1-score."
     ],
-    logo: "https://media.licdn.com/dms/image/v2/D560BAQGIZewdCoscfA/company-logo_100_100/company-logo_100_100/0/1690823958391/fiverr_freelancers_buyer_and_seller_logo?e=1770854400&v=beta&t=CrrXwOl3gArMhxwRxyFpAp0pWgjA-Z6TcFpGzA7TRyM"
+    logo: "/assets/icons/fiverr-logo.jpg"
   },
   {
     id: 4,
@@ -46,11 +46,10 @@ export const workData: Experience[] = [
     company: "Jabil",
     period: "Feb 2023 - Jul 2023",
     description: [
-      "Developed computer vision pipelines for PCB defect detection using YOLOv5/v8, OpenCV, and pretrained CNNs including void detection in X-ray images and component defect classification on 230,000+ components.",
-      "Implemented safety compliance detection system using YOLOv5 to monitor worker PPE compliance with automated warning systems for non-compliance scenarios.",
-      "Deployed end-to-end ML models to production using AWS SageMaker and Flask REST APIs, gaining hands-on experience with model deployment and inference optimization."
+      "Developed computer vision pipelines for PCB defect detection using YOLOv5/v8, OpenCV, and pretrained CNNs including void detection in X-ray images and component defect classification on 200,000+ components.",
+      "Implemented safety compliance detection system using YOLOv5 to monitor worker PPE compliance with automated warning systems for non-compliance scenarios."
     ],
-    logo: "https://media.licdn.com/dms/image/v2/C560BAQGYO9Q1rEKrpg/company-logo_200_200/company-logo_200_200/0/1630653658787/jabil_logo?e=1770854400&v=beta&t=CkPNbOgnGYbwfPYk6lVamoBX5A8TpLa48K9_IcCIncI"
+    logo: "/assets/icons/jabil-logo.jpg"
   }
 ];
 

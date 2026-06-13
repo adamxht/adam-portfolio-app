@@ -124,8 +124,8 @@ export default function Home() {
           <div className={"imageWrapper"}>
             <div className={"imageUnderlay"}></div>
             <img 
-              src="https://media.licdn.com/dms/image/v2/D5603AQFPgzgdPvezdg/profile-displayphoto-crop_800_800/B56ZiSgL8.HcAI-/0/1754804570278?e=1770854400&v=beta&t=B9ZCHsl0J8bsKvJsTGdkDx59FvNIdiZtoDCHslNk8H8"
-              alt="John Doe Profile"
+              src="/assets/profile/linkedin-profile-pic.png"
+              alt="Profile picture"
               width={300}
               height={300}
               className={"profileImg"}
@@ -219,19 +219,19 @@ export default function Home() {
               </a>
               <a href="https://github.com/adamxht" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="GitHub">
                 <span className={"icon"}>
-                  <img src="https://media.licdn.com/dms/image/v2/C560BAQFmuLSyL1nlPA/company-logo_200_200/company-logo_200_200/0/1678231359043/github_logo?e=1770854400&v=beta&t=ZuWj1JohQKoGT55Xwrq_UDqXbZv2LTLv8S3RQodaYVQ" alt="LinkedIn" style={{ width: '2.5rem', height: '2.5rem' }} />
+                  <img src="/assets/icons/github-logo.jpg" alt="GitHub" style={{ width: '2.5rem', height: '2.5rem' }} />
                 </span>
                 <span className={"label"}>GitHub</span>
               </a>
               <a href="https://www.linkedin.com/in/tay-xue-hao/" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="LinkedIn">
                 <span className={"icon"}>
-                  <img src="https://media.licdn.com/dms/image/v2/C560BAQHaVYd13rRz3A/company-logo_200_200/company-logo_200_200/0/1638831590218/linkedin_logo?e=1770854400&v=beta&t=6PDW8E0jLScGdCXVtMGOEA8b5suMylgTIyfAYDy5yVo" alt="LinkedIn" style={{ width: '2.5rem', height: '2.5rem' }} />
+                  <img src="/assets/icons/linkedin-logo.jpg" alt="LinkedIn" style={{ width: '2.5rem', height: '2.5rem' }} />
                 </span>
                 <span className={"label"}>LinkedIn</span>
               </a>
               <a href="https://www.fiverr.com/dravent" target="_blank" rel="noopener noreferrer" className={"socialLink"} title="Fiverr">
                 <span className={"icon"}>
-                  <img src="https://media.licdn.com/dms/image/v2/D560BAQGIZewdCoscfA/company-logo_100_100/company-logo_100_100/0/1690823958391/fiverr_freelancers_buyer_and_seller_logo?e=1770854400&v=beta&t=CrrXwOl3gArMhxwRxyFpAp0pWgjA-Z6TcFpGzA7TRyM" alt="Fiverr" style={{ width: '2.5rem', height: '2.5rem' }} />
+                  <img src="/assets/icons/fiverr-logo.jpg" alt="Fiverr" style={{ width: '2.5rem', height: '2.5rem' }} />
                 </span>
                 <span className={"label"}>Fiverr</span>
               </a>
