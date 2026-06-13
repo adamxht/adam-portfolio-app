@@ -7,10 +7,13 @@ export const workData: Experience[] = [
     company: "Mediatek",
     period: "Aug 2025 - Present",
     description: [
-      "Port models from model vendors such as Google to Mediatek's LLM SDK, enabling state-of-the-art LLMs to run on Mediatek's flagship devices.",
-      "Optimize LLM graphs to run efficiently on Mobile devices with minimal accuracy loss.",
-      "Perform Post Training Quantization and Quantization Aware Finetuning to minimize accuracy loss after model optimization.",
-      "Develop Model Analytics and Visualization tools to analyze model health at various levels of granularity."
+      "Led end-to-end porting of Gemma 4 LLM, Vision Encoder, and MTP Speculative Decoding Drafter to Google AICore runtime through a 4-stage lowering pipeline: Huggingface graph -> NPU-aware PyTorch graph -> PTQ-ed and JIT-traced TFLite -> compiled NPU model.",
+      "Developed Google Android runtime for Gemma 4, including tensor I/O buffer management, memory footprint optimization, KV cache management, batch inference, and accuracy debugging analytics.",
+      "Passed Google accuracy evaluation and prompt-mode latency KPIs (~160% for Fast model, ~130% for Main model).",
+      "Implemented Matformer based on research paper techniques to enable weight sharing and reduce disk and memory overhead by ~50%.",
+      "Contributed to Mediatek's LLM SDK by converting customer model graphs into NPU-compatible graph format and using QAT with DeepSpeed to recover accuracy loss after quantization.",
+      "Implemented a two-phase knowledge distillation style Device Aware Training (DAT) to recover model compilation accuracy loss for LLM models.",
+      "Built tensor-level and logits-level analytics visualization tools to explain and debug distribution or cosine similarity shifts across the 4-stage pipeline and QAT/DAT flows."
     ],
     logo: "/assets/icons/mediatek-logo.jpg"
   },
