@@ -12,7 +12,7 @@ export const workData: Experience[] = [
       "Passed Google accuracy evaluation and prompt-mode latency KPIs (~160% for Fast model, ~130% for Main model).",
       "Implemented Matformer based on research paper techniques to enable weight sharing and reduce disk and memory overhead by ~50%.",
       "Contributed to Mediatek's LLM SDK by converting customer model graphs into NPU-compatible graph format and using QAT with DeepSpeed to recover accuracy loss after quantization.",
-      "Implemented a two-phase knowledge distillation style Device Aware Training (DAT) to recover model compilation accuracy loss for LLM models.",
+      "Implemented a two-phase knowledge distillation style Training to recover model compilation accuracy loss for LLM models.",
       "Built tensor-level and logits-level analytics visualization tools to explain and debug distribution or cosine similarity shifts across the 4-stage pipeline and QAT/DAT flows."
     ],
     logo: "/assets/icons/mediatek-logo.jpg"
